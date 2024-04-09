@@ -1,4 +1,11 @@
 #!/usr/bin/env bash
+# put me in /home/pi/prusa-connect.sh
+# dependencies:
+# rpicam-still (to use your Raspberry Pi Camera Module)
+# curl (to send images via HTTP to prusa-connect)
+# bash (to run this script)
+# install with:
+# sudo apt install rpicam-apps-lite curl bash
 
 set -Eeu
 set -o pipefail
