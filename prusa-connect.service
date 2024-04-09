@@ -1,0 +1,17 @@
+# place me at /lib/systemd/system/prusa-connect.service
+# check status:
+# systemctl status prusa-connect.service
+# enable and start now:
+# sudo systemctl enable --now prusaconnect.service
+
+[Unit]
+Description=upload camera images to prusa-connect
+After=multi-user.target
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/bash /home/pi/prusa-connect.sh
+Restart=on-abort
+
+[Install]
+WantedBy=multi-user.target
