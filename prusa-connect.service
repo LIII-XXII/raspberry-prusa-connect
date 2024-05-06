@@ -1,6 +1,8 @@
 # place me at /lib/systemd/system/prusa-connect.service
 # check status:
 # systemctl status prusa-connect.service
+# view logs:
+# journalctl -u prusa-connect.service
 # enable and start now:
 # sudo systemctl enable --now prusaconnect.service
 
