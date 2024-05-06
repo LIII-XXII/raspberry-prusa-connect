@@ -15,6 +15,24 @@ FINGERPRINT="your-printer-fingerprint"
 TOKEN="your-prusa-connect-webcam-token"
 # PRINTER_UUID="abcdef01-2345-6789-abcd-ef0123456"
 
+ROTATION="${ROTATION:=0}" # 0 or 180
+
+if [ -z "${CAMERA:-}" ]
+then
+      echo "finding the camera capture binary"
+      if which libcamera-still
+      then
+            CAMERA=libcamera-still
+      elif which rpicam-still
+      then
+            CAMERA=rpicam-still
+      else
+            echo "oops, I could not find rpicam-apps-lite or libcamera-apps-still installed"
+            exit 1
+      fi
+fi
+echo "using camera capture binary: $CAMERA"
+
 # shellcheck disable=SC2154
 trap 'declare rc=$?;
       >&2 echo "Unexpected error (exit-code $rc) executing $BASH_COMMAND at ${BASH_SOURCE[0]} line $LINENO";
@@ -24,11 +42,12 @@ main () {
 
   while true
   do
-    if rpicam-still \
+    if "$CAMERA" \
       --width 2304 --height 1296 \
       -v 0 \
       -t 1000 \
       --nopreview \
+      --rotation "$ROTATION" \
       -o - \
     | curl  https://webcam.connect.prusa3d.com/c/snapshot  \
       -X PUT \
