@@ -4,7 +4,7 @@
 # view logs:
 # journalctl -u prusa-connect.service
 # enable and start now:
-# sudo systemctl enable --now prusaconnect.service
+# sudo systemctl enable --now prusa-connect.service
 
 [Unit]
 Description=upload camera images to prusa-connect
