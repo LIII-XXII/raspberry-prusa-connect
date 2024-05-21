@@ -50,6 +50,7 @@ main () {
       --rotation "$ROTATION" \
       -o - \
     | curl  https://webcam.connect.prusa3d.com/c/snapshot  \
+      --max-time 300 \
       -X PUT \
       -L --no-progress-meter --fail-with-body \
       -H "Content-Type: image/jpg" \
